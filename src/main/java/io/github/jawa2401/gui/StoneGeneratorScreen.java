@@ -29,10 +29,12 @@ public class StoneGeneratorScreen extends ContainerScreen<StoneGeneratorContaine
         renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         renderHoveredTooltip(matrixStack, mouseX, mouseY);
+
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+
         RenderSystem.color4f(1, 1, 1, 1);
 
         minecraft.getTextureManager().bindTexture(GUI);
@@ -41,10 +43,5 @@ public class StoneGeneratorScreen extends ContainerScreen<StoneGeneratorContaine
         int j = guiTop;
 
         blit(matrixStack, i, j, 0, 0, xSize, ySize);
-
-
-        int textY = (height / 2) - 90;
-        drawCenteredString(matrixStack, font, String.format("%03d", (int) stoneGeneratorBlock.rockGenerationProgress * 100) + "%", Color.WHITE, width / 2, textY);
-
     }
 }

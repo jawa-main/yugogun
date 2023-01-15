@@ -26,7 +26,10 @@ public class StoneGeneratorContainer extends Container {
         super(YContainers.STONE_GENERATOR_CONTAINER.get(), winId);
 
         this.tileEntity = world.getTileEntity(pos);
+
         stoneGeneratorBlock = (StoneGeneratorTE) tileEntity;
+        stoneGeneratorBlock.container = this;
+
         this.playerEntity = playerEntity;
         this.playerInventory = new InvWrapper(playerInventory);
 

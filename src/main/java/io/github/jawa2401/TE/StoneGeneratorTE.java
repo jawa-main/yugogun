@@ -1,11 +1,8 @@
 package io.github.jawa2401.TE;
 
 import io.github.jawa2401.YConfig;
+import io.github.jawa2401.container.StoneGeneratorContainer;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -13,17 +10,15 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 
 public class StoneGeneratorTE extends TileEntity implements ITickableTileEntity {
 
@@ -32,6 +27,8 @@ public class StoneGeneratorTE extends TileEntity implements ITickableTileEntity 
     public static final int SLOT_LAVA_IN = 2;
 
     public float rockGenerationProgress = 0;
+
+    public StoneGeneratorContainer container;
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
@@ -53,14 +50,15 @@ public class StoneGeneratorTE extends TileEntity implements ITickableTileEntity 
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                switch (slot) {
-                    case SLOT_WATER_IN:
-                        return stack.getItem() == Items.WATER_BUCKET;
-                    case SLOT_LAVA_IN:
-                        return stack.getItem() == Items.LAVA_BUCKET;
-                    default:
-                        return false;
-                }
+//                switch (slot) {
+//                    case SLOT_WATER_IN:
+//                        return stack.getItem() == Items.WATER_BUCKET;
+//                    case SLOT_LAVA_IN:
+//                        return stack.getItem() == Items.LAVA_BUCKET;
+//                    default:
+//                        return false;
+//                }
+                return true;
             }
 
             @Override
@@ -68,12 +66,12 @@ public class StoneGeneratorTE extends TileEntity implements ITickableTileEntity 
                 return 64;
             }
 
-            @Nonnull
-            @Override
-            public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                if (!isItemValid(slot, stack)) return stack;
-                return super.insertItem(slot, stack, simulate);
-            }
+//            @Nonnull
+//            @Override
+//            public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+//                if (!isItemValid(slot, stack)) return stack;
+//                return super.insertItem(slot, stack, simulate);
+//            }
         };
     }
 
@@ -83,20 +81,23 @@ public class StoneGeneratorTE extends TileEntity implements ITickableTileEntity 
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if (side == Direction.DOWN) {
                 // set output slots to 1
-                System.out.println("dir == down");
-                ItemStackHandler _h = new ItemStackHandler(NonNullList.from(Items.COBBLESTONE.getDefaultInstance())) {
-                    @Nonnull
-                    @Override
-                    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                        if (slot != SLOT_ROCK_OUT) return Items.AIR.getDefaultInstance();
-                        return super.insertItem(slot, stack, simulate);
-                    }
-
+//                System.out.println("dir == down");
+                ItemStackHandler _h = new ItemStackHandler(3) {
                     @Nonnull
                     @Override
                     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                        if (slot != SLOT_ROCK_OUT) return Items.AIR.getDefaultInstance();
-                        return super.extractItem(slot, amount, simulate);
+                        if (slot != SLOT_ROCK_OUT) return ItemStack.EMPTY;
+                        if (!simulate) return ItemStack.EMPTY;
+                        ItemStack stack = itemHandler.getStackInSlot(slot);
+                        int count = stack.getCount();
+                        if (amount > count)
+                        {
+                            return ItemStack.EMPTY;
+                        }
+                        stack.setCount(count - amount);
+                        ItemStack copy = stack.copy();
+                        copy.setCount(amount);
+                        return copy;
                     }
                 };
 

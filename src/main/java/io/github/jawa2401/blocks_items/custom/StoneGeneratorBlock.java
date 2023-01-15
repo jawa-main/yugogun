@@ -10,11 +10,13 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.inventory.container.StonecutterContainer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -89,5 +91,19 @@ public class StoneGeneratorBlock extends Block {
                 return new StoneGeneratorContainer(i, worldIn, pos, inv, plr);
             }
         };
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        StoneGeneratorTE stoneGeneratorTE = (StoneGeneratorTE) worldIn.getTileEntity(pos);
+
+        if (stoneGeneratorTE == null) return;
+
+        for (int i = 0; i < 3; i ++)
+        {
+            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), stoneGeneratorTE.container.getSlot(i).getStack()));
+        }
+
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 }
