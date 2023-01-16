@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "yugogun:block/mortar" },
-        "facing=south": { "model": "yugogun:block/mortar", "y": 180 },
-        "facing=west": { "model": "yugogun:block/mortar", "y": 270 },
-        "facing=east": { "model": "yugogun:block/mortar", "y": 90 }
-    }
-}

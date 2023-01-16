@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "yugogun:block/iron_extractor" }
+    }
+}
