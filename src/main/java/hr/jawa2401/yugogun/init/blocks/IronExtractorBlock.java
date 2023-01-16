@@ -18,6 +18,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -85,25 +86,5 @@ public class IronExtractorBlock extends Block {
                 return new IronExtractorContainer(i, worldIn, pos, inv, plr);
             }
         };
-    }
-
-    @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        IronExtractorTE ironExtractorTE = (IronExtractorTE) worldIn.getTileEntity(pos);
-
-        if (ironExtractorTE == null) {
-            super.onBlockHarvested(worldIn, pos, state, player);
-            return;
-        }
-        if (ironExtractorTE.container == null) {
-            super.onBlockHarvested(worldIn, pos, state, player);
-            return;
-        }
-
-        for (int i = 0; i < IronExtractorTE.SLOT_COUNT; i++) {
-            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), ironExtractorTE.container.getSlot(i).getStack()));
-        }
-
-        super.onBlockHarvested(worldIn, pos, state, player);
     }
 }

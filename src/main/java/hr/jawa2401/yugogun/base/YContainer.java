@@ -8,6 +8,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -18,10 +19,10 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nullable;
 
-public class YContainer<T extends YTileEntityWithContainer> extends Container {
+public class YContainer extends Container {
 
     public final PlayerEntity playerEntity;
-    public final T tileEntity;
+    public final TileEntity tileEntity;
     public final Block block;
     public final IItemHandler playerInventory;
 
@@ -37,14 +38,13 @@ public class YContainer<T extends YTileEntityWithContainer> extends Container {
         super(type, winId);
 
         this.block = block;
-        this.tileEntity = (T) world.getTileEntity(pos);
+        this.tileEntity = world.getTileEntity(pos);
         this.playerInventory = new InvWrapper(playerInventory);
         this.playerEntity = playerEntity;
 
         layoutPlayerInventorySlots(leftCol, topRow);
 
         if (tileEntity != null) {
-            tileEntity.container = this;
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
                 for (YSlot slot : slots) {
                     addSlot(slot.toSlot(h));

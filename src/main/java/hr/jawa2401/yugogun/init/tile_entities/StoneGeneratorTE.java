@@ -1,15 +1,14 @@
 package hr.jawa2401.yugogun.init.tile_entities;
 
 import hr.jawa2401.yugogun.YConfig;
-import hr.jawa2401.yugogun.base.YTileEntityWithContainer;
 import hr.jawa2401.yugogun.init.YTileEntities;
-import hr.jawa2401.yugogun.init.container.StoneGeneratorContainer;
 import hr.jawa2401.yugogun.util.ItemUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -21,7 +20,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class StoneGeneratorTE extends YTileEntityWithContainer<StoneGeneratorContainer> implements ITickableTileEntity {
+public class StoneGeneratorTE extends TileEntity implements ITickableTileEntity {
 
     public static final int SLOT_WATER_IN = 0;
     public static final int SLOT_ROCK_OUT = 1;

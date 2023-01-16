@@ -86,24 +86,4 @@ public class StoneGeneratorBlock extends Block {
             }
         };
     }
-
-    @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        StoneGeneratorTE stoneGeneratorTE = (StoneGeneratorTE) worldIn.getTileEntity(pos);
-
-        if (stoneGeneratorTE == null) {
-            super.onBlockHarvested(worldIn, pos, state, player);
-            return;
-        }
-        if (stoneGeneratorTE.container == null) {
-            super.onBlockHarvested(worldIn, pos, state, player);
-            return;
-        }
-
-        for (int i = 0; i < StoneGeneratorTE.SLOT_COUNT; i++) {
-            worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), stoneGeneratorTE.container.getSlot(i).getStack()));
-        }
-
-        super.onBlockHarvested(worldIn, pos, state, player);
-    }
 }

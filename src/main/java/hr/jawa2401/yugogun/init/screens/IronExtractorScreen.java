@@ -22,7 +22,7 @@ public class IronExtractorScreen extends ContainerScreen<IronExtractorContainer>
     public IronExtractorScreen(IronExtractorContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
 
-        ironExtractorTE = screenContainer.tileEntity;
+        ironExtractorTE = (IronExtractorTE) screenContainer.tileEntity;
     }
 
     @Override

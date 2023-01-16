@@ -10,7 +10,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class StoneGeneratorContainer extends YContainer<StoneGeneratorTE> {
+public class StoneGeneratorContainer extends YContainer {
     @Override
     public int getSlotCount() {
         return 3;

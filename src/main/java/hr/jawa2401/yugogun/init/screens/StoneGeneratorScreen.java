@@ -7,19 +7,16 @@ import hr.jawa2401.yugogun.init.container.StoneGeneratorContainer;
 import hr.jawa2401.yugogun.init.tile_entities.StoneGeneratorTE;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class StoneGeneratorScreen extends ContainerScreen<StoneGeneratorContainer> {
 
-    public StoneGeneratorTE stoneGeneratorBlock;
-
     private final ResourceLocation GUI = new ResourceLocation(Main.MOD_ID, "textures/gui/stone_generator_gui.png");
 
     public StoneGeneratorScreen(StoneGeneratorContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
-
-        stoneGeneratorBlock = screenContainer.tileEntity;
     }
 
     @Override
