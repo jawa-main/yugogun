@@ -1,6 +1,5 @@
 package hr.jawa2401.yugogun.init;
 
-import com.mrcrayfish.guns.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -14,6 +13,6 @@ public class YTab extends ItemGroup {
 
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(ModItems.ASSAULT_RIFLE.get());
+        return new ItemStack(YBlocks.IRON_EXTRACTOR_BLOCK.get().asItem());
     }
 }

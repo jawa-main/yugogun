@@ -25,24 +25,6 @@ issueTrackerURL="https://github.com/HaloOfBlocks/yugogun/issues"
     versionRange="[1.16.5,1.17)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.yugogun]]
-    modId="cgm"
-    mandatory=true
-    versionRange="[1.2.6,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.yugogun]]
-    modId="obfuscate"
-    mandatory=true
-    versionRange="[0.6.3,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.yugogun]]
-    modId="switchbow"
-    mandatory=true
-    versionRange="[0.6.3,)"
-    ordering="NONE"
-    side="BOTH"
 [modproperties.yugogun]
     catalogueItemIcon="yugogun:ace_of_spades"
     configuredBackground="minecraft:textures/block/stripped_birch_log.png"

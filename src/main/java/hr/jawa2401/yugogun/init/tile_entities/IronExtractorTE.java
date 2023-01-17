@@ -2,9 +2,7 @@ package hr.jawa2401.yugogun.init.tile_entities;
 
 import hr.jawa2401.yugogun.YConfig;
 import hr.jawa2401.yugogun.init.YTileEntities;
-import hr.jawa2401.yugogun.util.ItemUtil;
 import net.minecraft.block.BlockState;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,7 +13,6 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -64,41 +61,41 @@ public class IronExtractorTE extends TileEntity implements ITickableTileEntity {
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            if (side == Direction.DOWN) {
-                // output slot
-                ItemStackHandler _h = new ItemStackHandler(SLOT_COUNT) {
-                    @Nonnull
-                    @Override
-                    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                        if (slot != SLOT_IRON_OUT) return ItemStack.EMPTY;
-                        if (!simulate) return ItemStack.EMPTY;
-                        return ItemUtil.extract(itemHandler.getStackInSlot(slot), amount);
-                    }
-                };
-
-                LazyOptional<IItemHandler> lazyOptional = LazyOptional.of(() -> _h);
-                return lazyOptional.cast();
-            } else // for code readability
-            {
-                // input slot
-                ItemStackHandler _h = new ItemStackHandler(SLOT_COUNT) {
-                    @Nonnull
-                    @Override
-                    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                        if (!simulate) return ItemStack.EMPTY;
-                        if (slot != SLOT_ROCK_IN) return ItemStack.EMPTY;
-                        if (stack.getItem() != Items.COBBLESTONE) return ItemStack.EMPTY;
-
-                        itemHandler.setStackInSlot(slot, stack);
-
-                        return stack;
-                    }
-                };
-
-                LazyOptional<IItemHandler> lazyOptional = LazyOptional.of(() -> _h);
-                return lazyOptional.cast();
-            }
-//            return handler.cast();
+//            if (side == Direction.DOWN) {
+//                // output slot
+//                ItemStackHandler _h = new ItemStackHandler(SLOT_COUNT) {
+//                    @Nonnull
+//                    @Override
+//                    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+//                        if (!simulate) return ItemStack.EMPTY;
+//                        if (slot != SLOT_IRON_OUT) return ItemStack.EMPTY;
+//                        return ItemUtil.extract(itemHandler.getStackInSlot(slot), amount);
+//                    }
+//                };
+//
+//                LazyOptional<IItemHandler> lazyOptional = LazyOptional.of(() -> _h);
+//                return lazyOptional.cast();
+//            } else // for code readability
+//            {
+//                // input slot
+//                ItemStackHandler _h = new ItemStackHandler(SLOT_COUNT) {
+//                    @Nonnull
+//                    @Override
+//                    public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+//                        if (!simulate) return ItemStack.EMPTY;
+//                        if (slot != SLOT_ROCK_IN) return ItemStack.EMPTY;
+//                        if (stack.getItem() != Items.COBBLESTONE) return ItemStack.EMPTY;
+//
+//                        itemHandler.setStackInSlot(slot, stack);
+//
+//                        return stack;
+//                    }
+//                };
+//
+//                LazyOptional<IItemHandler> lazyOptional = LazyOptional.of(() -> _h);
+//                return lazyOptional.cast();
+//            }
+            return LazyOptional.of(() -> itemHandler).cast();
         }
         return super.getCapability(cap, side);
     }

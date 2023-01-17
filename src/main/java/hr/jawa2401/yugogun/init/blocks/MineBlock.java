@@ -1,9 +1,9 @@
 package hr.jawa2401.yugogun.init.blocks;
 
-import hr.jawa2401.yugogun.YEvents;
 import hr.jawa2401.yugogun.init.YBlocks;
 import hr.jawa2401.yugogun.init.YItems;
 import hr.jawa2401.yugogun.init.YTab;
+import hr.jawa2401.yugogun.util.SoundUtil;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -54,7 +54,7 @@ public class MineBlock extends Block {
 
         worldIn.createExplosion(entityIn, pos.getX(), pos.getY(), pos.getZ(), 5, Explosion.Mode.DESTROY);
 
-        YEvents.echoExplosion(server, pos);
+        SoundUtil.echoExplosion(server, pos);
     }
 
     @Override

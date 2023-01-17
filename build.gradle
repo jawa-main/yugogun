@@ -1,21 +1,15 @@
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
-        maven {
-            name = 'sponge'
-            url = 'https://repo.spongepowered.org/maven'
-        }
         mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
-apply plugin: 'org.spongepowered.mixin'
 
 version = "0.8.0-1.16.5"
 group = "io.github.jawa2401"
@@ -31,8 +25,6 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 yugogun {
                     source sourceSets.main
@@ -77,9 +69,7 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
-    implementation fg.deobf('curse.maven:obfuscate-289380:3740120')
-    implementation fg.deobf('curse.maven:mrcrayfishs-gun-mod-289479:3830458')
-    implementation fg.deobf('curse.maven:switch-bow-257820:3397697')
+//    implementation files("libs/yugosounds.jar")
 //    runtimeOnly fg.deobf('curse.maven:configured-457570:3780620')
 //    runtimeOnly fg.deobf('curse.maven:catalogue-459701:3780550')
 //    runtimeOnly fg.deobf('curse.maven:jei-238222:3681294')

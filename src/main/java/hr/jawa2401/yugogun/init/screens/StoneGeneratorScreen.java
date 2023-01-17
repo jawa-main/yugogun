@@ -4,10 +4,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import hr.jawa2401.yugogun.Main;
 import hr.jawa2401.yugogun.init.container.StoneGeneratorContainer;
-import hr.jawa2401.yugogun.init.tile_entities.StoneGeneratorTE;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 

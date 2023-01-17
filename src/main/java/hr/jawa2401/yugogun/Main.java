@@ -33,8 +33,8 @@ public class Main {
     private void doClientStuff(final FMLClientSetupEvent event) {
         event.enqueueWork(() ->
         {
-            ScreenManager.registerFactory(YContainers.STONE_GENERATOR_CONTAINER.get(), StoneGeneratorScreen::new);
             ScreenManager.registerFactory(YContainers.IRON_EXTRACTOR_CONTAINER.get(), IronExtractorScreen::new);
+            ScreenManager.registerFactory(YContainers.STONE_GENERATOR_CONTAINER.get(), StoneGeneratorScreen::new);
         });
     }
 }
